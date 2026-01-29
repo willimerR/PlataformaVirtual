@@ -2,13 +2,13 @@ console.log("ucducgud");
  const express = require("express");
  const mysql = require("mysql2");
  const cors = require("cors");
- const Config = require("dotenv");
+  require("dotenv").config();
 
  const App = express();
  App.use(express.json());
  App.use(cors());
 
- Config.config();
+
 
  const port = 3000;
  //mysql://root:awuYBQRAVlCWEVqwepeJxSsQrxRzhrym@hopper.proxy.rlwy.net:32147/railway
