@@ -24,7 +24,7 @@ const my = mysql.createPool({
 })
 
 
-my.connect((err)=>{
+my.getConnection((err)=>{
     if(err){
         console.log("Error con la base de datos");
         return
