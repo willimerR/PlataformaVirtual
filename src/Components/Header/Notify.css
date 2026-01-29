@@ -1,0 +1,21 @@
+.contentr::after{
+    content: "1";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+    background: red;
+    border-radius: 50%;
+    font-size: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+   
+
+  
+}
+.contentr::after.active{
+    display: none;
+}
