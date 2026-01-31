@@ -10,7 +10,7 @@ console.log("ucducgud");
 
 
 
- const port = 3000;
+ const port = process.env.Database_port || 3000;
  //mysql://root:awuYBQRAVlCWEVqwepeJxSsQrxRzhrym@hopper.proxy.rlwy.net:32147/railway
 
 
@@ -75,6 +75,6 @@ App.get('/test-db', (req, res) => {
 
  
 
- App.listen(port, ()=>{
+ App.listen(port, '0.0.0.0.0', ()=>{
 console.log(`Servidor Express corriendo en http://localhost:${port}`)
  })
