@@ -22,7 +22,26 @@ const my = mysql.createPool({
     port:process.env.Database_port || 3000,
 
 })
+console.log(process.env.Database_port)
 
+App.post('/test-db2', (req, res) => {
+    const Query = "SELECT * FROM usuario WHERE `Nombre` = ? AND `Contrasena` = ?";
+ 
+    my.query(Query, [req.body.usuario, req.body.contrasena], (err, results) => {
+      if (err) {
+        return res.status(500).send({ mensaje: "Error en la consulta" });
+      }
+  
+      // Validar si hay resultados
+      if (results && results.length > 0) {
+        return res.send({ mensaje: "Inicio de sesión exitoso" });
+      } else {
+        return res.status(401).send({ mensaje: "Credenciales incorrectas" });
+      }
+    });
+  });
+  
+  
 
 my.getConnection((err)=>{
     if(err){
@@ -35,7 +54,7 @@ my.getConnection((err)=>{
 App.get('/test-db', (req, res) => {
 
     const Query= "SELECT * FROM usuario";
-  db.query(Query, (err, results) => {
+   my.query(Query, (err, results) => {
   
       if (err) {
           res.status(500).send('Error en la consulta');

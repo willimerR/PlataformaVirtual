@@ -12,30 +12,28 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const SendData = () => {
-    // try {
-    //   const response = await axios.post(Students.Usuarios);
-    //   console.log(response);
-    //   if (response.status === 200) {
-    //     navigate("/Hero");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
-
-  const SendDa = (e) => {
+  const SendDa = async (e) => {
     e.preventDefault();
 
     if (Usuaro === "" || Password === "") {
       setactive(true);
-      navigate("/");
     } else {
       setactive(false);
-      navigate("/Hero");
     }
+    e.target[0].focus();
+    console.log(Response.status);
+    try {
+      const response = await axios.post("http://localhost:3000/test-db2", {
+        usuario: Usuaro,
+        contrasena: Password,
+      });
 
-    console.log("ggf");
+      if (response.status === 200) {
+        navigate("/Hero");
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   return (
@@ -44,7 +42,7 @@ const Login = () => {
         <div className=" relative flex justify-center items-center w-[400px] top-[200px] flex-col bg-green-200 P-[10px] rounded-xl p-5 shadow-2x m-[10px]">
           <h1 className="text-[25px]">Bienvenid@s </h1>
 
-          <form className="w-full p-2.5 " onSubmit={SendData}>
+          <form className="w-full p-2.5 " onSubmit={SendDa}>
             <div className="mt-5 mb-[20px]">
               <input
                 className="w-full h-[40px] pl-[10px] rounded-xl outline-none bg-amber-50"

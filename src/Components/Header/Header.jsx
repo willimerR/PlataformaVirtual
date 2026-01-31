@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../img/logo.png";
 import { FaCircleUser } from "react-icons/fa6";
 import { MdNotifications } from "react-icons/md";
@@ -8,12 +8,26 @@ import { RiAccountCircleFill } from "react-icons/ri";
 import Audios from "../Header/Audio/New-SMS.mp3";
 import { PiSignOutFill } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Header = () => {
   const [OpenNotify, SetOpenNottify] = useState(false);
   const [Notify, setNotify] = useState("contentr");
   const [Open, SetOpen] = useState(false);
   const [Open1, SetOpen1] = useState(false);
+  const [Nameprofile, Setnameprofile] = useState("");
+
+  useEffect(() => {
+    const Datas = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/test-db");
+        Setnameprofile(response.data[1].Nombre);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    Datas();
+  }, []);
 
   const SendData = () => {
     SetOpen(!Open);
@@ -125,7 +139,7 @@ const Header = () => {
 
       {Open1 && (
         <div className="box flex justify-center absolute drop-shadow-xl right-[0] m-[10px] z-[100] flex-col gap-5 items-center w-[200px] h-[150px] bg-green-300 rounded-xl ">
-          <h1 className=" text-xl">Usuario</h1>
+          <h1 className=" text-xl">{Nameprofile}</h1>
 
           <li className="list-none hover:text-black">
             <PiSignOutFill className="relative top-[34px] text-[20px] text-red-500 hover:text-black" />
